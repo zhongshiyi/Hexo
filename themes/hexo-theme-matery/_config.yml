@@ -44,7 +44,7 @@ menu:
 time:
   enable: false
   year: 2019 # 年份
-  month: 12 # 月份
+  month: 06 # 月份
   date: 28 # 日期
   hour: 00 # 小时
   minute: 00 # 分钟
@@ -68,19 +68,20 @@ dream:
   showTitle: true
   title: 今天，你在学习吗？
   text: 你不得不逼自己优秀 因为身后有许多人等着看你的笑话 所以要对自己狠一点 逼自己努力 再过五年你将会感谢今天发狠的自己 恨透今天懒惰自卑的自己 愿你在薄情的世界里深情地活着 现在你要是多学一样本事 以后你就能少一句求人的话
+
 # Whether to display the musics.
 # 是否在首页显示音乐.
 music:
-  enable: true
+  enable: false
   showTitle: true
   title: 听听音乐
   fixed: false # 开启吸底模式
-  autoplay: true # 是否自动播放
+  autoplay: false # 是否自动播放
   theme: '#42b983'
   loop: 'all' # 音频循环播放, 可选值: 'all', 'one', 'none'
   order: 'list' # 音频循环顺序, 可选值: 'list', 'random'
   preload: 'auto' # 预加载，可选值: 'none', 'metadata', 'auto'
-  volume: 0.5 # 默认音量，请注意播放器会记忆用户设置，用户手动设置音量后默认音量即失效
+  volume: 0.7 # 默认音量，请注意播放器会记忆用户设置，用户手动设置音量后默认音量即失效
   listFolded: false # 列表默认折叠
   listMaxHeight: #列表最大高度
 
@@ -98,7 +99,7 @@ video:
   theme: '#42b983'
   loop: false # 是否循环播放
   preload: 'auto' # 预加载，可选值: 'none', 'metadata', 'auto'
-  volume: 0.5
+  volume: 0.7
 
 # Whether to display the title of the recommended posts
 # 是否显示推荐文章的标题
@@ -128,8 +129,10 @@ indexbtn:
 socialLink:
   github:  https://github.com/zhongshiyi
   email: 1351896179@qq.com
+  facebook: # https://www.facebook.com/xxx
+  twitter: # https://twitter.com/xxx
   qq: 1351896179
-  weibo: # https://weibo.com/xxx
+  weibo: # https://weibo.com/p/1005056033949158/info?mod=pedit
   zhihu: https://www.zhihu.com/people/da-da-de-ai-tou/activities
   rss: true # true、false
 
@@ -171,7 +174,7 @@ copyright:
 # 是否激活mathjax数学公式，这是全局配置，但文章仍然不会都开启mathjax渲染，
 # 考虑到mathjax加载比较耗时，你还需要在需要渲染的文章的Front-matter中再加上`mathjax: true`才行.
 mathjax:
-  enable: true
+  enable: false
   cdn: https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML
 
 # Post word count, reading duration, site total word count.
@@ -181,11 +184,11 @@ mathjax:
 # 文章信息--若要开启文章字数统计，需要安装 hexo-wordcount 插件，安装命令: `npm i --save hexo-wordcount`
 postInfo:
   date: true # 发布日期
-  update: true # 更新日期
-  wordCount: true # 文章字数统计
-  totalCount: true # 站点总文章字数
+  update: false # 更新日期
+  wordCount: false # 文章字数统计
+  totalCount: false # 站点总文章字数
   min2read: false # 文章阅读时长
-  readCount: true # 文章阅读次数
+  readCount: false # 文章阅读次数
 
 # Whether to activate the 'love' effect of clicking on the page.
 # 是否激活点击页面的'爱心'效果，默认激活.
@@ -195,9 +198,9 @@ clicklove:
 # profile in about page, including avatars, career, and personal introductions.
 # 在”关于”页面中配置个人信息，包括头像、职业和个人介绍.
 profile:
-  avatar: /medias/avatar.jpg
-  career: 中北大学 | 计算机科学与技术
-  introduction: 我是中北大学计算机科学与技术专业2017级本科生。菜鸡一只...
+  avatar: /medias/avatar.png
+  career: 中北大学 | 本科生 | 计算机科学与技术
+  introduction: just do it
 
 # config my projects informations in about page.
 # If you don't want to display this `My Projects` content, you can deactivate or delete this configuration.
@@ -250,7 +253,7 @@ mySkills:
 # If you don't want to display this `Gallery` content, you can deactivate or delete this configuration.
 # 在“关于”页面配置"我的相册"图片，如果你不需要这些信息则可以将其设置为不激活或者将其删除.
 myGallery:
-  enable: false
+  enable: true
   data:
     - /medias/featureimages/0.jpg
     - /medias/featureimages/1.jpg
@@ -263,13 +266,13 @@ postCalendar: true
 # the Gitalk config，default disabled
 # Gitalk 评论模块的配置，默认为不激活
 gitalk:
-  enable: true
-  owner: zhongshiyi
-  repo: zhongshiyi.github.io
+  enable: false
+  owner:
+  repo:
   oauth:
     clientId:
     clientSecret:
-  admin: zhongshiyi
+  admin:
 
 # the Gitment config，default disabled
 # Gitment 评论模块的配置，默认为不激活
@@ -297,7 +300,7 @@ livere:
 # To use it, activate the configuration item and set appId and appKey.
 # Valine 评论模块的配置，默认为不激活，如要使用，就请激活该配置项，并设置 appId 和 appKey.
 valine:
-  enable: true
+  enable: false
   appId:
   appKey:
   notify: false
@@ -305,14 +308,14 @@ valine:
   visitor: true
   avatar: 'mm' # Gravatar style : mm/identicon/monsterid/wavatar/retro/hide
   pageSize: 10
-  placeholder: '如果你没有github账号，还可以在这里评论啦！' # Comment Box placeholder
+  placeholder: 'just go go' # Comment Box placeholder
   background: /medias/comment_bg.png
 
 # Whether to display fork me on github icon and link, default true, You can change it to your repo address
 # 配置是否在 header 中显示 fork me on github 的图标，默认为true，你可以修改为你的仓库地址.
 githubLink:
   enable: true
-  url: https://github.com/zhongshiyi
+  url: https://github.com/blinkfox/hexo-theme-matery
   title: Fork Me
 
 # The password verification feature of read post. To use this feature,
@@ -336,7 +339,7 @@ busuanziStatistics:
 # Add google analytics configuration
 # 添加 Google Analytics 配置
 googleAnalytics:
-  enable: true
+  enable: false
   id:
 
 # Add baidu analytics configuration
