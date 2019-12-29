@@ -2,7 +2,7 @@
 title: github+hexe搭建个人博客详细教程
 date: 2019-12-29 13:23:17
 categories:
- - Totorial
+ - 软件安装与配置
 tags:
  - Github
  - Hexo
@@ -10,6 +10,12 @@ tags:
 ---
 
 # github + hexo搭建个人博客详细教程
+
+## 我的博客
+
+本博客基于[Hexo](https://hexo.io/zh-cn/docs/)，所以我们首先需要了解一下我们搭建博客需要用到的框架。大家可以进入[Hexo](https://hexo.io/zh-cn/docs/)官网进行详细查看，因为 `Hexo` 的创建者是台湾人，对中文的支持很友好，可以选择中文进行查看。
+
+最后，如果项目和教程对你有所帮助或者你看见了还算比较喜欢，欢迎给我的[github项目仓库](https://github.com/zhongshiyi/Hexo.git) `star`，谢谢您！
 
 ## Github创建个人仓库
 
@@ -26,6 +32,8 @@ tags:
 
 ## 链接Github与本地
 
+打开 `Git Base Here` 并依次输入：
+
 ```
 git config --global user.name "你的github用户名"
 git config --global user.email "你的邮箱"
@@ -40,7 +48,7 @@ ssh-keygen -t rsa -C "你的邮箱"
 打开github，点击头像下面的 `settings` ，再点击`SSH and GPG keys`，新建一个SSH，名字随便。
 ![](03.png)
 
-找到生成的`.ssh` 的文件夹中的`id_rsa.pub` 密钥，打开，将类容全部复制到上图的 `key` 中，并点击 `Add SSH key` 。
+找到生成的`.ssh` 的文件夹中的`id_rsa.pub` 密钥，打开，将内容全部复制到上图的 `key` 中，并点击 `Add SSH key` 。
 ![](04.png)
 
 输入`ssh git@github,com`,如果如下图显示出现你的用户名，那就成功了。
@@ -102,3 +110,9 @@ hexo d
 用浏览器输入我们的博客地址： `用户名+github.io` ，如我的博客 zhongshiyi.github.io
 
 然后你就会发现你的博客已经上线了，能够在网络上被访问了。
+
+参考文章：
+
+1、 [Github+Hexo 搭建个人网站详细教程](https://zhuanlan.zhihu.com/p/26625249)
+
+2、 [超详细 Hexo+Github 博客搭建小白教程](https://godweiyang.com/2018/04/13/hexo-blog/#toc-heading-2)
