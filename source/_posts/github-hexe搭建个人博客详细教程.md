@@ -27,7 +27,7 @@ tags:
 
 为了把本地的网页文件上传到github上面去，我们需要用到分布式版本控制工具--[Git](https://git-scm.com/download/win)
 
-若安装失败，请看其他Git安装教程。安装成功后，鼠标右键打开Git Bash Here
+若安装失败，请看其他Git安装教程。安装成功后，鼠标右键打开 `Git Bash Here`
 ![](02.png)
 
 ## 链接Github与本地
