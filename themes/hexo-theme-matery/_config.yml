@@ -72,7 +72,7 @@ dream:
 # Whether to display the musics.
 # 是否在首页显示音乐.
 music:
-  enable: false
+  enable: ture
   showTitle: true
   title: 听听音乐
   fixed: false # 开启吸底模式
