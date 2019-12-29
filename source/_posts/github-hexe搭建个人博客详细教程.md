@@ -3,6 +3,8 @@ title: github+hexe搭建个人博客详细教程
 date: 2019-12-29 13:23:17
 categories:
  - 软件安装与配置
+top: true
+cover: true
 tags:
  - Github
  - Hexo
