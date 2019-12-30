@@ -61,12 +61,15 @@
                 </div>
                 <% } %>
 
-                <% if (theme.postInfo.readCount && theme.busuanziStatistics && theme.busuanziStatistics.enable) { %>
-                    <div id="busuanzi_container_page_pv" class="info-break-policy">
-                        <i class="far fa-eye fa-fw"></i><%- __('readCount') %>:&nbsp;&nbsp;
-                        <span id="busuanzi_value_page_pv"></span>
-                    </div>
-				<% } %>
+                
+                    <% if (theme.busuanziStatistics && theme.busuanziStatistics.enable) { %>
+                    <span id="busuanzi_container_site_pv" style='display:none'></span>
+                    <i class="fa fa-eye fa-fw"></i><%- __('readCount') %>:&nbsp;&nbsp;
+                    <span id="busuanzi_value_page_pv"></span>
+
+                    <% } %>
+
+    
             </div>
 
         </div>
