@@ -1,5 +1,5 @@
 ---
-title: github+hexe搭建个人博客详细教程
+title: Github+Hexo搭建个人博客详细教程
 date: 2019-12-29 13:23:17
 categories:
  - 软件安装与配置
@@ -12,7 +12,7 @@ tags:
  - 博客
 ---
 
-# github + hexo搭建个人博客详细教程
+# Github+Hexo搭建个人博客详细教程
 
 ## 我的博客
 
