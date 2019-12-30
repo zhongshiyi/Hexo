@@ -5,6 +5,7 @@ categories:
  - 软件安装与配置
 top: true
 cover: true
+mathjax: true
 tags:
  - Github
  - Hexo

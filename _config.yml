@@ -105,7 +105,7 @@ deploy:
 prism_plugin:
   mode: 'preprocess'    # realtime/preprocess
   theme: 'tomorrow'
-  line_number: false    # default false
+  line_number: true    # default false
   custom_css:
 
 search:
