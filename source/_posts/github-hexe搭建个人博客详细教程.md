@@ -12,7 +12,7 @@ tags:
  - 博客
 ---
 
-# Github+Hexo搭建个人博客详细教程
+# Github + Hexo 搭建个人博客详细教程
 
 ## 我的博客
 
