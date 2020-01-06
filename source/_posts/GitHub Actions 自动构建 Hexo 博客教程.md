@@ -11,7 +11,7 @@ coverImg:
 password:
 summary:
 tags:
- - Github Actions
+ - GitHub Actions
  - Hexo
  - 博客
 categories:
@@ -35,21 +35,21 @@ categories:
 
 
 
-![](GitHub-博客的自动构建化教程/1.png)
+![](GitHub Actions 自动构建 Hexo 博客教程/1.png)
 
-点击 **Add a new secret**，Name 设定为 **id_rsa**，Value 填上你的私钥。
+点击 **Add a new secret**，Name 设定为 **id_rsa**，Value 填上你的私钥。如果你不知道你的私钥是什么，请看上一篇 [GitHub + Hexo 搭建个人博客详细教程]()
 
-![](GitHub-博客的自动构建化教程/2.png)
+![](GitHub Actions 自动构建 Hexo 博客教程/2.png)
 
 ## 配置工作流
 
 进入仓库的 Actions 界面，点击 `New workflow` 按钮
 
-![image-20200106144639190](GitHub-博客的自动构建化教程/image-20200106144639190.png)
+![image-20200106144639190](GitHub Actions 自动构建 Hexo 博客教程/image-20200106144639190.png)
 
 在项目的根目录新建 .github/workflows/nodejs.yml 文件
 
-![image-20200106152455618](GitHub-博客的自动构建化教程/image-20200106152455618.png)
+![image-20200106152455618](GitHub Actions 自动构建 Hexo 博客教程/image-20200106152455618.png)
 
 输入以下内容并保存。
 
@@ -92,8 +92,12 @@ jobs:
 
 ```
 
-![image-20200106152706829](GitHub-博客的自动构建化教程/image-20200106152706829.png)
+![image-20200106152706829](GitHub Actions 自动构建 Hexo 博客教程/image-20200106152706829.png)
 
 这里填你的 **GitHub 用户名**和**邮箱**
 
-然后就完成了 Hexo 博客自动部署的脚本了，之后写博客就可以直接 `git add`,`git commit`,`git push` 三连，等它两到三分钟就能部署完成在你的博客网站上了。
+然后就完成了 Hexo 博客自动部署的脚本了，之后写博客就可以直接 `git add`, `git commit`, `git push` 三连，等它两到三分钟就能部署完成在你的博客网站上了。
+
+参考文章：
+
+[使用 GitHub Actions 自动化部署 Hexo](teaching.applysquare.com)
