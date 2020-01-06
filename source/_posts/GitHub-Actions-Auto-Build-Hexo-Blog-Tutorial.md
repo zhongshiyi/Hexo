@@ -16,11 +16,12 @@ tags:
  - 博客
 categories:
  - 软件安装与配置
+typora-root-url: ../../source/
 ---
 
 # GitHub Actions 自动部署 Hexo 博客教程
 
-# 前言
+## 前言
 
 上一篇 Github + Hexo 搭建个人博客详细教程中，我们已经搭建好了属于自己的博客，但是博客和文章的源文件都在我们本地，如果丢失就很麻烦，所以现在我们引用 Github Actions
 来自动部署我们提交到仓库的博客源文件。这样我们每次在本地写好博客，就可以直接 `git add .`, `git commit -m`, `git push` 三连。就会自动生成 Hexo 博客。以后就不用每次写完文章之后再执行 hexo clean && hexo g -d 了。
@@ -33,23 +34,21 @@ categories:
 
 进入 **settings** 页面，在 **Secrets** 处添加环境变量。
 
-
-
-![](1.png)
+![](/images/GitHub-Actions-Auto-Build-Hexo-Blog-Tutorial/1.png)
 
 点击 **Add a new secret**，Name 设定为 **id_rsa**，Value 填上你的私钥。如果你不知道你的私钥是什么，请看上一篇 [GitHub + Hexo 搭建个人博客详细教程](https://zhongshiyi.github.io/2019/12/29/github-hexo-da-jian-ge-ren-bo-ke-xiang-xi-jiao-cheng/)
 
-![](2.png)
+![](/images/GitHub-Actions-Auto-Build-Hexo-Blog-Tutorial/2.png)
 
 ## 配置工作流
 
 进入仓库的 Actions 界面，点击 `New workflow` 按钮
 
-![](image-20200106144639190.png)
+![](/images/GitHub-Actions-Auto-Build-Hexo-Blog-Tutorial/image-20200106144639190.png)
 
 在项目的根目录新建 .github/workflows/nodejs.yml 文件
 
-![](image-20200106152455618.png)
+![](/images/GitHub-Actions-Auto-Build-Hexo-Blog-Tutorial/image-20200106152455618.png)
 
 输入以下内容并保存。
 
@@ -92,7 +91,7 @@ jobs:
 
 ```
 
-![](image-20200106152706829.png)
+![](/images/GitHub-Actions-Auto-Build-Hexo-Blog-Tutorial/image-20200106152706829.png)
 
 这里填你的 **GitHub 用户名**和**邮箱**
 
@@ -100,4 +99,4 @@ jobs:
 
 参考文章：
 
-[使用 GitHub Actions 自动化部署 Hexo](teaching.applysquare.com)
+[使用 GitHub Actions 自动化部署 Hexo](https://suikastar.com/posts/24967/)

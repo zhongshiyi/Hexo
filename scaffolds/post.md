@@ -12,4 +12,5 @@ password:
 summary:
 tags:
 categories:
+typora-root-url: ../../source/
 ---
