@@ -30,6 +30,8 @@ jobs:
         run: |
           npm i -g hexo-cli
           npm i
+          cd public
+          echo "zsyle.top" >> CNAME
       - name: Deploy hexo
         run: |
           hexo g -d
