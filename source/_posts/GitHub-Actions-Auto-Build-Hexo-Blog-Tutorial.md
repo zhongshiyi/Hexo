@@ -1,5 +1,5 @@
 ---
-title: GitHub Actions 自动构建 Hexo 博客教程
+title: GitHub Actions 自动部署 Hexo 博客教程
 top: true
 cover: true
 toc: true
