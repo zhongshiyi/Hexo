@@ -266,7 +266,7 @@ postCalendar: true
 # the Gitalk config，default disabled
 # Gitalk 评论模块的配置，默认为不激活
 gitalk:
-  enable: true
+  enable: false
   owner:
   repo:
   oauth:
@@ -300,11 +300,11 @@ livere:
 # To use it, activate the configuration item and set appId and appKey.
 # Valine 评论模块的配置，默认为不激活，如要使用，就请激活该配置项，并设置 appId 和 appKey.
 valine:
-  enable: false
-  appId:
-  appKey:
-  notify: false
-  verify: false
+  enable: true
+  appId: o7r9zch76iROf0i0AYE4Lv9l-gzGzoHsz
+  appKey: FHwlr0CdgRdxWkt5TyEcnG6D
+  notify: true
+  verify: true
   visitor: true
   avatar: 'mm' # Gravatar style : mm/identicon/monsterid/wavatar/retro/hide
   pageSize: 10
