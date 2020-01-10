@@ -32,7 +32,4 @@ jobs:
           npm i
       - name: Deploy hexo
         run: |
-          hexo g
-          cd public
-          echo "zsyle.top" >> CNAME
-          hexo d
+          hexo g -d
