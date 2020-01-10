@@ -93,37 +93,13 @@ jobs:
 
 ![](/images/GitHub-Actions-Auto-Build-Hexo-Blog-Tutorial/image-20200106152706829.png)
 
-这里填你的 **GitHub 用户名**和**邮箱**
+**这里填你的 GitHub 用户名和邮箱**
 
 然后就完成了 Hexo 博客自动部署的脚本了，之后写博客就可以直接 `git add`, `git commit`, `git push` 三连，等它两到三分钟就能部署完成在你的博客网站上了。
 
 ![](/images/GitHub-Actions-Auto-Build-Hexo-Blog-Tutorial/image-20200110151909785.png)
 
 
-
-以上是配置到 zhongshiyi.github.io 的 GitHub 提供的网站
-
-## 部署到个人网站
-
-**若想部署到自己购买的域名下**，修改最后一句 `run` 
-
-原来是：
-
-```yaml
-run: |
-  hexo g -d
-```
-修改为：
-
-```yaml
-run: |
-  hexo g
-  cd public
-  echo "zsyle.top" >> CNAME
-  hexo d
-```
-
-这里的 `zsyle.top` 改为你的域名就可以了，意思是每次部署博客时都在 public 文件夹下创建一个 内容为 `zsyle.top` 的 CNAME 文件。修改之后再 `push` 一次就可以了。
 
 
 参考文章：
