@@ -99,7 +99,8 @@ theme: hexo-theme-matery
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
 - type: git
-  repository: git@github.com:zhongshiyi/zhongshiyi.github.io.git
+  # repository: git@github.com:zhongshiyi/zhongshiyi.github.io.git
+  repository: git@zsyle.top:/var/repo/blog.git
   branch: master
 - type: baidu_url_submitter
 
