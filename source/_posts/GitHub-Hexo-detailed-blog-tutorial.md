@@ -187,6 +187,239 @@ hexo d
 
 **这里就解析配置完毕了。**
 
+## 优化网站加载速度
+
+### 优化图片加载
+
+修改 `/themes/matery/source/js`中的`matery.js` 文件
+
+第103行：
+
+```js
+$('#articleContent, #myGallery').lightGallery({
+    selector: '.img-item',
+    // 启用字幕
+    subHtmlSelectorRelative: true,
+    showThumbByDefault: false   //这句加上
+});
+
+$(document).find('img[data-original]').each(function(){	//这几句也加上
+    $(this).parent().attr("href", $(this).attr("data-original"));
+});
+
+```
+再装一个插件：
+
+```bash
+npm install hexo-lazyload-image --save
+```
+再在博客根目录下的`_config.yml`文件中添加：
+
+```yaml
+lazyload:
+  enable: true
+  onlypost: false # optional
+  loadingImg: # optional eg ./images/loading.gif
+  isSPA: false # optional
+```
+再部署一次，就实现了博客的图片懒加载
+
+### Gulp 实现代码压缩
+
+`Gulp` 实现代码压缩，以提升网页加载速度。
+
+1 首先安装 `Gulp` 插件和几个功能模块，依次运行以下命令。
+
+```bash
+npm install gulp --save  #安装gulp
+# 安装功能模块
+npm install gulp-htmlclean gulp-htmlmin gulp-uglify gulp-imagemin --save
+# 额外的功能模块
+npm install gulp-debug gulp-clean-css gulp-changed gulp-if gulp-plumber gulp-babel babel-preset-es2015 del --save
+```
+2 接下来在博客的根目录下新建`gulpfile.js`文件，并复制下面的内容到文件中。
+
+```js
+var gulp = require("gulp");
+var debug = require("gulp-debug");
+var cleancss = require("gulp-clean-css"); //css压缩组件
+var uglify = require("gulp-uglify"); //js压缩组件
+var htmlmin = require("gulp-htmlmin"); //html压缩组件
+var htmlclean = require("gulp-htmlclean"); //html清理组件
+var imagemin = require("gulp-imagemin"); //图片压缩组件
+var changed = require("gulp-changed"); //文件更改校验组件
+var gulpif = require("gulp-if"); //任务 帮助调用组件
+var plumber = require("gulp-plumber"); //容错组件（发生错误不跳出任务，并报出错误内容）
+var isScriptAll = true; //是否处理所有文件，(true|处理所有文件)(false|只处理有更改的文件)
+var isDebug = true; //是否调试显示 编译通过的文件
+var gulpBabel = require("gulp-babel");
+var es2015Preset = require("babel-preset-es2015");
+var del = require("del");
+var Hexo = require("hexo");
+var hexo = new Hexo(process.cwd(), {}); // 初始化一个hexo对象
+
+// 清除public文件夹
+gulp.task("clean", function() {
+  return del(["public/**/*"]);
+});
+
+// 下面几个跟hexo有关的操作，主要通过hexo.call()去执行，注意return
+// 创建静态页面 （等同 hexo generate）
+gulp.task("generate", function() {
+  return hexo.init().then(function() {
+    return hexo
+      .call("generate", {
+        watch: false
+      })
+      .then(function() {
+        return hexo.exit();
+      })
+      .catch(function(err) {
+        return hexo.exit(err);
+      });
+  });
+});
+
+// 启动Hexo服务器
+gulp.task("server", function() {
+  return hexo
+    .init()
+    .then(function() {
+      return hexo.call("server", {});
+    })
+    .catch(function(err) {
+      console.log(err);
+    });
+});
+
+// 部署到服务器
+gulp.task("deploy", function() {
+  return hexo.init().then(function() {
+    return hexo
+      .call("deploy", {
+        watch: false
+      })
+      .then(function() {
+        return hexo.exit();
+      })
+      .catch(function(err) {
+        return hexo.exit(err);
+      });
+  });
+});
+
+// 压缩public目录下的js文件
+gulp.task("compressJs", function() {
+  return gulp
+    .src(["./public/**/*.js", "!./public/libs/**"]) //排除的js
+    .pipe(gulpif(!isScriptAll, changed("./public")))
+    .pipe(gulpif(isDebug, debug({ title: "Compress JS:" })))
+    .pipe(plumber())
+    .pipe(
+      gulpBabel({
+        presets: [es2015Preset] // es5检查机制
+      })
+    )
+    .pipe(uglify()) //调用压缩组件方法uglify(),对合并的文件进行压缩
+    .pipe(gulp.dest("./public")); //输出到目标目录
+});
+
+// 压缩public目录下的css文件
+gulp.task("compressCss", function() {
+  var option = {
+    rebase: false,
+    //advanced: true,               //类型：Boolean 默认：true [是否开启高级优化（合并选择器等）]
+    compatibility: "ie7" //保留ie7及以下兼容写法 类型：String 默认：''or'*' [启用兼容模式； 'ie7'：IE7兼容模式，'ie8'：IE8兼容模式，'*'：IE9+兼容模式]
+    //keepBreaks: true,             //类型：Boolean 默认：false [是否保留换行]
+    //keepSpecialComments: '*'      //保留所有特殊前缀 当你用autoprefixer生成的浏览器前缀，如果不加这个参数，有可能将会删除你的部分前缀
+  };
+  return gulp
+    .src(["./public/**/*.css", "!./public/**/*.min.css"]) //排除的css
+    .pipe(gulpif(!isScriptAll, changed("./public")))
+    .pipe(gulpif(isDebug, debug({ title: "Compress CSS:" })))
+    .pipe(plumber())
+    .pipe(cleancss(option))
+    .pipe(gulp.dest("./public"));
+});
+
+// 压缩public目录下的html文件
+gulp.task("compressHtml", function() {
+  var cleanOptions = {
+    protect: /<\!--%fooTemplate\b.*?%-->/g, //忽略处理
+    unprotect: /<script [^>]*\btype="text\/x-handlebars-template"[\s\S]+?<\/script>/gi //特殊处理
+  };
+  var minOption = {
+    collapseWhitespace: true, //压缩HTML
+    collapseBooleanAttributes: true, //省略布尔属性的值  <input checked="true"/> ==> <input />
+    removeEmptyAttributes: true, //删除所有空格作属性值    <input id="" /> ==> <input />
+    removeScriptTypeAttributes: true, //删除<script>的type="text/javascript"
+    removeStyleLinkTypeAttributes: true, //删除<style>和<link>的type="text/css"
+    removeComments: true, //清除HTML注释
+    minifyJS: true, //压缩页面JS
+    minifyCSS: true, //压缩页面CSS
+    minifyURLs: true //替换页面URL
+  };
+  return gulp
+    .src("./public/**/*.html")
+    .pipe(gulpif(isDebug, debug({ title: "Compress HTML:" })))
+    .pipe(plumber())
+    .pipe(htmlclean(cleanOptions))
+    .pipe(htmlmin(minOption))
+    .pipe(gulp.dest("./public"));
+});
+
+// 压缩 public/uploads 目录内图片
+gulp.task("compressImage", function() {
+  var option = {
+    optimizationLevel: 5, //类型：Number  默认：3  取值范围：0-7（优化等级）
+    progressive: true, //类型：Boolean 默认：false 无损压缩jpg图片
+    interlaced: false, //类型：Boolean 默认：false 隔行扫描gif进行渲染
+    multipass: false //类型：Boolean 默认：false 多次优化svg直到完全优化
+  };
+  return gulp
+    .src("./public/medias/**/*.*")
+    .pipe(gulpif(!isScriptAll, changed("./public/medias")))
+    .pipe(gulpif(isDebug, debug({ title: "Compress Images:" })))
+    .pipe(plumber())
+    .pipe(imagemin(option))
+    .pipe(gulp.dest("./public"));
+});
+// 执行顺序： 清除public目录 -> 产生原始博客内容 -> 执行压缩混淆 -> 部署到服务器
+gulp.task(
+  "build",
+  gulp.series(
+    "clean",
+    "generate",
+    "compressHtml",
+    "compressCss",
+    "compressJs",
+    "compressImage",
+    gulp.parallel("deploy")
+  )
+);
+
+// 默认任务
+gulp.task(
+  "default",
+  gulp.series(
+    "clean",
+    "generate",
+    gulp.parallel("compressHtml", "compressCss", "compressImage", "compressJs")
+  )
+);
+//Gulp4最大的一个改变就是gulp.task函数现在只支持两个参数，分别是任务名和运行任务的函数
+```
+3 最后 `hexo clean` && `hexo g` && `gulp` && `hexo d` 就可以了。
+
+**注意，很可能你会运行到第三步，也就是运行gulp压缩命令时会报错**
+
+那是因为gulp安装的本地版本和hexo自带的版本不对应导致，第三步gulp压缩可以用下面命令强制使用本地版本：
+
+```bash
+node ./node_modules/gulp/bin/gulp.js
+```
+这样代码的优化就完成了。再`hexo g`、`hexo d`部署到网站就可以了。
+
 **下一篇博客介绍如何利用 GitHub Actions 工作流自动部署博客**
 
 参考文章：
